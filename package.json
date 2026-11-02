@@ -21,7 +21,8 @@
   },
   "scripts": {
     "start": "expo start --localhost",
-    "android": "expo start --localhost -c --android",
+    "android": "expo start --localhost --android",
+    "clean": "expo start -c",
     "start:lan": "expo start --lan",
     "ios": "expo start --ios",
     "web": "expo start --web"
