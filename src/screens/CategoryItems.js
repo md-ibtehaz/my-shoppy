@@ -24,7 +24,7 @@ const CARD_WIDTH = (width - (HORIZONTAL_PADDING * 2) - GAP) / 2;
 
 export default function CategoryItems({ route, navigation }) {
   const categoryName = route?.params?.categoryName || 'Products';
-  const { addToCart, getItemQuantity } = useContext(CartContext);
+  const { addToCart, updateQuantity, getItemQuantity } = useContext(CartContext);
 
   // Modal State matching Reference Image 2
   const [modalVisible, setModalVisible] = useState(false);
@@ -79,14 +79,36 @@ export default function CategoryItems({ route, navigation }) {
 
           <Text style={styles.productPrice}>{formatPrice(item.price)}</Text>
 
-          {/* Add to Cart Button */}
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={() => handleAddToCart(item)}
-            activeOpacity={0.82}
-          >
-            <Text style={styles.addButtonText}>Add to Cart</Text>
-          </TouchableOpacity>
+          {/* Add to Cart or Quantity Stepper */}
+          {inCartCount > 0 ? (
+            <View style={styles.stepperContainer}>
+              <TouchableOpacity
+                style={styles.stepperBtn}
+                onPress={() => updateQuantity(item.id, -1)}
+                activeOpacity={0.7}
+              >
+                <Ionicons name="remove" size={15} color="#FFFFFF" />
+              </TouchableOpacity>
+
+              <Text style={styles.stepperQuantityText}>{inCartCount}</Text>
+
+              <TouchableOpacity
+                style={styles.stepperBtn}
+                onPress={() => updateQuantity(item.id, 1)}
+                activeOpacity={0.7}
+              >
+                <Ionicons name="add" size={15} color="#FFFFFF" />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={() => handleAddToCart(item)}
+              activeOpacity={0.82}
+            >
+              <Text style={styles.addButtonText}>Add to Cart</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
@@ -311,11 +333,36 @@ const styles = StyleSheet.create({
     paddingVertical: 9,
     borderRadius: 9,
     alignItems: 'center',
+    height: 38,
+    justifyContent: 'center',
   },
   addButtonText: {
     color: '#FFFFFF',
     fontWeight: '600',
     fontSize: 13,
+  },
+  stepperContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: COLORS.primary,
+    borderRadius: 9,
+    paddingHorizontal: 5,
+    height: 38,
+  },
+  stepperBtn: {
+    width: 28,
+    height: 28,
+    borderRadius: RADIUS.full,
+    backgroundColor: 'rgba(255, 255, 255, 0.22)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  stepperQuantityText: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: 14,
+    paddingHorizontal: 8,
   },
   emptyContainer: {
     flex: 1,

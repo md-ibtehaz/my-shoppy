@@ -24,7 +24,7 @@ const { width } = Dimensions.get('window');
 const PRODUCT_CARD_WIDTH = (width - 44) / 2;
 
 export default function HomeScreen({ navigation }) {
-  const { addToCart, getItemQuantity, totalItems } = useContext(CartContext);
+  const { addToCart, updateQuantity, getItemQuantity, totalItems } = useContext(CartContext);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -244,13 +244,33 @@ export default function HomeScreen({ navigation }) {
                         {formatPrice(product.price)}
                       </Text>
 
-                      <TouchableOpacity
-                        style={styles.addBtn}
-                        onPress={() => handleAddToCart(product)}
-                        activeOpacity={0.8}
-                      >
-                        <Ionicons name="add" size={17} color="#FFFFFF" />
-                      </TouchableOpacity>
+                      {inCartCount > 0 ? (
+                        <View style={styles.homeStepper}>
+                          <TouchableOpacity
+                            style={styles.homeStepperBtn}
+                            onPress={() => updateQuantity(product.id, -1)}
+                            activeOpacity={0.7}
+                          >
+                            <Ionicons name="remove" size={13} color="#FFFFFF" />
+                          </TouchableOpacity>
+                          <Text style={styles.homeStepperText}>{inCartCount}</Text>
+                          <TouchableOpacity
+                            style={styles.homeStepperBtn}
+                            onPress={() => updateQuantity(product.id, 1)}
+                            activeOpacity={0.7}
+                          >
+                            <Ionicons name="add" size={13} color="#FFFFFF" />
+                          </TouchableOpacity>
+                        </View>
+                      ) : (
+                        <TouchableOpacity
+                          style={styles.addBtn}
+                          onPress={() => handleAddToCart(product)}
+                          activeOpacity={0.8}
+                        >
+                          <Ionicons name="add" size={17} color="#FFFFFF" />
+                        </TouchableOpacity>
+                      )}
                     </View>
                   </View>
                 </View>
@@ -578,6 +598,28 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  homeStepper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.primary,
+    borderRadius: RADIUS.full,
+    paddingHorizontal: 3,
+    paddingVertical: 2,
+  },
+  homeStepperBtn: {
+    width: 22,
+    height: 22,
+    borderRadius: RADIUS.full,
+    backgroundColor: 'rgba(255, 255, 255, 0.22)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  homeStepperText: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: 12,
+    paddingHorizontal: 6,
   },
   emptyState: {
     alignItems: 'center',

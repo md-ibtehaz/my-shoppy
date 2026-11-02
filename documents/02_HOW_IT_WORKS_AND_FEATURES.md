@@ -72,10 +72,10 @@ Is screen ka design authentic e-commerce tiles par based hai:
 Jab user kisi category ko select karta hai:
 1. **Clean Breadcrumb Header**:
    - Top par back button aur title aata hai: `Categories / [Category Name]` aur `[Category Name] For You!`.
-2. **Product Cards**:
+2. **Product Cards & Dynamic Stepper**:
    - Image ke upar ek Heart (Wishlist) button.
    - Agar product pehle se cart mein hai, toh image ke niche `[X in bag]` ka status badge dikhta hai.
-   - Product name, category tag, price in Indian Rupees (`₹`), aur "Add to Cart" button.
+   - **Interactive Stepper**: Pehli baar "Add to Cart" dabane par modal popup aata hai. Modal band hone ke baad wahi button badal kar `[-] [Quantity] [+]` stepper ban jata hai. User bina cart mein jaye product tile se hi quantity increase (`+`) ya decrease (`-`) kar sakta hai. Jab quantity `0` ho jati hai, button wapas normal "Add to Cart" ban jata hai.
 3. **"Added to Cart!" Custom Modal**:
    - Native boring alert dialog ko hata kar custom modal banaya gaya hai.
    - Isme green checkmark circle (`✓`), product image, naam, price, friendly message, aur "OK" button show hota hai.
