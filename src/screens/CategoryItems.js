@@ -115,7 +115,7 @@ export default function CategoryItems({ route, navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right']}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       {/* Category Breadcrumb & Heading Bar (as in Reference Image 2) */}
       <View style={styles.headerBar}>
         <TouchableOpacity
