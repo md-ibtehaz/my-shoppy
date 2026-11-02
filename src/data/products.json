@@ -248,5 +248,40 @@
     "category": "Electronics",
     "price": 1799,
     "image": "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=600"
+  },
+  {
+    "id": "36",
+    "name": "Classic White Trainers",
+    "category": "Sneakers",
+    "price": 2499,
+    "image": "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600"
+  },
+  {
+    "id": "37",
+    "name": "Running Air Sneakers",
+    "category": "Sneakers",
+    "price": 3299,
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600"
+  },
+  {
+    "id": "38",
+    "name": "Urban Street High-Tops",
+    "category": "Sneakers",
+    "price": 3999,
+    "image": "https://images.unsplash.com/photo-1552346154-21d32810baa3?w=600"
+  },
+  {
+    "id": "39",
+    "name": "Minimalist Canvas Sneakers",
+    "category": "Sneakers",
+    "price": 1899,
+    "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600"
+  },
+  {
+    "id": "40",
+    "name": "Sport Performance Runners",
+    "category": "Sneakers",
+    "price": 4499,
+    "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600"
   }
 ]

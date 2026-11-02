@@ -1,6 +1,4 @@
-
 import React from 'react';
-
 import {
   View,
   Text,
@@ -8,190 +6,184 @@ import {
   ImageBackground,
   TouchableOpacity,
   ScrollView,
-  Dimensions
+  Dimensions,
 } from 'react-native';
-
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
+
+import { COLORS, SPACING, RADIUS, SHADOWS } from '../constants/theme';
+import categoriesData from '../data/categories.json';
 
 const { width } = Dimensions.get('window');
+// 2-column grid calculation with exact padding and gap matching reference Image 1
+const HORIZONTAL_PADDING = 18;
+const GAP = 14;
+const CARD_WIDTH = (width - (HORIZONTAL_PADDING * 2) - GAP) / 2;
 
-const CARD_WIDTH = (width - 54) / 2;
-
-const categories = [
-  {
-    id: '1',
-    name: 'Books',
-    image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&q=85'
-  },
-  {
-    id: '2',
-    name: 'Bags',
-    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=85'
-  },
-  {
-    id: '3',
-    name: 'Clothes',
-    image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&q=85'
-  },
-  {
-    id: '4',
-    name: 'Furniture',
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=85'
-  },
-  {
-    id: '5',
-    name: 'Electronics',
-    image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&q=85'
-  }
-];
-
-export default function CategoriseTiles({ navigation }) {
-
+export default function CategoriesTiles({ navigation }) {
   const handleCategoryPress = (category) => {
     navigation.navigate('CategoryProducts', {
-      categoryName: category.name
+      categoryName: category.name,
     });
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
+      {/* Top Brand Bar with Heart and Profile Icons (as in Reference Image 1) */}
+      <View style={styles.topBar}>
+        <View style={styles.brandWrapper}>
+          <Text style={styles.brandText}>MyShoppy</Text>
+          <View style={styles.brandUnderline} />
+        </View>
+
+        <View style={styles.topIconsGroup}>
+          <TouchableOpacity style={styles.iconBtn} activeOpacity={0.7}>
+            <Ionicons name="heart-outline" size={22} color={COLORS.textPrimary} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconBtn} activeOpacity={0.7}>
+            <Ionicons name="person-circle-outline" size={24} color={COLORS.textPrimary} />
+          </TouchableOpacity>
+        </View>
+      </View>
 
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
+        {/* Categories Section Heading */}
+        <Text style={styles.sectionHeading}>Categories</Text>
 
-        <View style={styles.header}>
-          <Text style={styles.heading}>
-            Explore Categories
-          </Text>
-
-          <Text style={styles.subtitle}>
-            Find everything you need in one place.
-          </Text>
-        </View>
-
+        {/* 2-Column Full-Image Background Tiles */}
         <View style={styles.categoryGrid}>
-
-          {categories.map((item) => (
-
+          {categoriesData.map((category) => (
             <TouchableOpacity
-              key={item.id}
+              key={category.id}
               style={styles.categoryCard}
-              activeOpacity={0.85}
-              onPress={() => handleCategoryPress(item)}
+              activeOpacity={0.88}
+              onPress={() => handleCategoryPress(category)}
             >
-
               <ImageBackground
-                source={{ uri: item.image }}
-                style={styles.categoryImage}
-                imageStyle={styles.imageStyle}
+                source={{ uri: category.image }}
+                style={styles.tileBackground}
+                imageStyle={styles.tileImage}
                 resizeMode="cover"
               >
-
-                <View style={styles.bottomOverlay}>
-                  <Text style={styles.categoryName}>
-                    {item.name.toUpperCase()}
+                {/* Full-bleed dark tint overlay for readability */}
+                <View style={styles.overlay}>
+                  <Text style={styles.categoryTitle} numberOfLines={2}>
+                    {category.name}
                   </Text>
                 </View>
-
               </ImageBackground>
-
             </TouchableOpacity>
-
           ))}
-
         </View>
-
       </ScrollView>
-
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-
   safeArea: {
     flex: 1,
-    backgroundColor: '#F8F9FA'
+    backgroundColor: COLORS.surface,
   },
-
+  topBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: HORIZONTAL_PADDING,
+    paddingTop: SPACING.xs,
+    paddingBottom: SPACING.sm,
+    backgroundColor: COLORS.surface,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.borderLight,
+  },
+  brandWrapper: {
+    alignItems: 'flex-start',
+  },
+  brandText: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: COLORS.primary,
+    fontStyle: 'italic',
+    letterSpacing: -0.3,
+  },
+  brandUnderline: {
+    width: 65,
+    height: 2.5,
+    backgroundColor: COLORS.accent,
+    borderRadius: 2,
+    marginTop: 2,
+  },
+  topIconsGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  iconBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: RADIUS.full,
+    backgroundColor: COLORS.surfaceMuted,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA'
+    backgroundColor: COLORS.surface,
   },
-
   scrollContent: {
-    paddingHorizontal: 18,
-    paddingBottom: 25
+    paddingHorizontal: HORIZONTAL_PADDING,
+    paddingTop: SPACING.md,
+    paddingBottom: SPACING.xl,
   },
-
-  header: {
-    marginTop: 20,
-    marginBottom: 25
+  sectionHeading: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: COLORS.textPrimary,
+    marginBottom: SPACING.md,
+    letterSpacing: -0.3,
   },
-
-  heading: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: '#1A535C',
-    marginBottom: 8
-  },
-
-  subtitle: {
-    fontSize: 15,
-    color: '#888888'
-  },
-
   categoryGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    gap: GAP,
   },
-
   categoryCard: {
     width: CARD_WIDTH,
-    height: CARD_WIDTH * 1.48,
-    marginBottom: 18,
-    borderRadius: 22,
+    height: 128,
+    borderRadius: 18,
     overflow: 'hidden',
-    backgroundColor: '#DDDDDD',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 5
+    backgroundColor: COLORS.surfaceMuted,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    ...SHADOWS.sm,
   },
-
-  categoryImage: {
+  tileBackground: {
     width: '100%',
     height: '100%',
-    justifyContent: 'flex-end'
   },
-
-  imageStyle: {
-    borderRadius: 22
+  tileImage: {
+    borderRadius: 17,
   },
-
-  bottomOverlay: {
-    height: 85,
-    width: '100%',
-    backgroundColor: 'rgba(0,0,0,0.58)',
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(15, 23, 42, 0.42)',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 5
+    paddingHorizontal: 12,
   },
-
-  categoryName: {
+  categoryTitle: {
     color: '#FFFFFF',
-    fontSize: 21,
-    fontWeight: '900',
-    letterSpacing: 1,
-    textAlign: 'center'
-  }
-
+    fontSize: 17,
+    fontWeight: '800',
+    textAlign: 'center',
+    letterSpacing: 0.3,
+    textShadowColor: 'rgba(0, 0, 0, 0.45)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 3,
+  },
 });
