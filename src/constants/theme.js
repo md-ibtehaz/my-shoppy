@@ -1,32 +1,35 @@
 export const COLORS = {
-  // Brand & Core
-  primary: '#0F172A',       // Slate 900 - Timeless, elegant primary for text and main buttons
-  primaryLight: '#1E293B',  // Slate 800 - Slightly elevated surface / secondary dark
-  primaryHover: '#334155',  // Slate 700
+  // Brand & Core (matching user reference design)
+  primary: '#3E6867',       // Dark sage / teal green as seen in reference headers & buttons
+  primaryDark: '#2C4E4D',
+  primaryLight: '#527F7E',
+  primaryHover: '#335857',
 
-  accent: '#0D9488',        // Teal 600 - Fresh, grounded e-commerce accent (prices, badges)
-  accentLight: '#CCFBF1',   // Teal 100 - Badge backgrounds
-  accentDark: '#0F766E',    // Teal 700
+  tabBar: '#446E6C',        // Exact dark teal green from the reference tab bar
+  accent: '#3E6867',        // Unified accent
+  accentOrange: '#FE6B0B',  // Vibrant orange for "Continue Shopping" button
 
   // Backgrounds & Surfaces
-  background: '#F8FAFC',    // Slate 50 - Soft neutral app canvas
-  surface: '#FFFFFF',       // Clean white for cards, sheets, headers
-  surfaceMuted: '#F1F5F9',  // Slate 100 - Inputs, button backgrounds
+  background: '#F8FAFC',    // Soft clean canvas
+  surface: '#FFFFFF',       // Clean white for cards, headers
+  surfaceMuted: '#F1F5F9',  // Subtle inputs & pills
+  bannerBlue: '#AEDFEE',    // Soft sky blue from hero banner
 
   // Borders & Dividers
-  border: '#E2E8F0',        // Slate 200 - Hairline borders
-  borderLight: '#F1F5F9',   // Slate 100
+  border: '#E2E8F0',
+  borderLight: '#F1F5F9',
 
   // Typography
-  textPrimary: '#0F172A',   // Slate 900 - High contrast readable headings
-  textSecondary: '#475569', // Slate 600 - Clear secondary text
-  textMuted: '#94A3B8',     // Slate 400 - Subtle hints and inactive icons
+  textPrimary: '#1E293B',
+  textSecondary: '#64748B',
+  textMuted: '#94A3B8',
+  textBrand: '#446E6C',
 
   // Semantic Status
-  success: '#16A34A',       // Green 600
-  successBg: '#DCFCE7',     // Green 100
-  destructive: '#DC2626',   // Red 600
-  destructiveBg: '#FEE2E2', // Red 100
+  success: '#22C55E',       // Green for accepted order checkmark
+  successBg: '#DCFCE7',
+  destructive: '#DC2626',
+  destructiveBg: '#FEE2E2',
 };
 
 export const SPACING = {

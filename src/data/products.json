@@ -1,287 +1,538 @@
-
 [
+  {
+    "id": "101",
+    "name": "Wireless Earbuds, IPX8",
+    "category": "Tech",
+    "subCategory": "Headphones",
+    "subtitle": "Organic Cotton, fairtrade certified",
+    "price": 89,
+    "color": "Midnight Black",
+    "rating": 4.8,
+    "ratingCount": 98,
+    "stock": 8,
+    "localImage": "prod-earbuds.png",
+    "image": "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=600"
+  },
+  {
+    "id": "102",
+    "name": "Airpods- Max",
+    "category": "Tech",
+    "subCategory": "Headphones",
+    "subtitle": "A perfect balance of high-fidelity audio",
+    "price": 549,
+    "color": "Pink",
+    "rating": 4.9,
+    "ratingCount": 240,
+    "stock": 12,
+    "localImage": "prod-airpods-max.png",
+    "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600"
+  },
+  {
+    "id": "103",
+    "name": "Bose BT Earphones",
+    "category": "Tech",
+    "subCategory": "Headphones",
+    "subtitle": "Table with air purifier, stained venner/black",
+    "price": 289,
+    "color": "Matte Black",
+    "rating": 5,
+    "ratingCount": 121,
+    "stock": 15,
+    "localImage": "prod-bose.png",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600"
+  },
+  {
+    "id": "104",
+    "name": "VIVEFOX Headphones",
+    "category": "Tech",
+    "subCategory": "Headphones",
+    "subtitle": "Wired Stereo Headsets With Mic",
+    "price": 39,
+    "color": "Crimson Red",
+    "rating": 5,
+    "ratingCount": 121,
+    "stock": 20,
+    "localImage": "prod-vivefox.png",
+    "image": "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600"
+  },
   {
     "id": "1",
     "name": "Classic Notebook",
     "category": "Books",
     "price": 199,
-    "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600"
+    "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600",
+    "subtitle": "Classic Notebook - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "2",
     "name": "Fiction Novel",
     "category": "Books",
     "price": 349,
-    "image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600"
+    "image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600",
+    "subtitle": "Fiction Novel - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "3",
     "name": "Study Guide",
     "category": "Books",
     "price": 499,
-    "image": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600"
+    "image": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600",
+    "subtitle": "Study Guide - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "4",
     "name": "Art and Craft Book",
     "category": "Books",
     "price": 299,
-    "image": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=600"
+    "image": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=600",
+    "subtitle": "Art and Craft Book - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "5",
     "name": "Programming Basics",
     "category": "Books",
     "price": 599,
-    "image": "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=600"
+    "image": "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=600",
+    "subtitle": "Programming Basics - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "6",
     "name": "Personal Development",
     "category": "Books",
     "price": 399,
-    "image": "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=600"
+    "image": "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=600",
+    "subtitle": "Personal Development - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "7",
     "name": "Children's Story Book",
     "category": "Books",
     "price": 249,
-    "image": "https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=600"
+    "image": "https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=600",
+    "subtitle": "Children's Story Book - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
-
   {
     "id": "8",
     "name": "Leather Handbag",
-    "category": "Bags",
+    "category": "Hand Bag",
     "price": 1299,
-    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600"
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600",
+    "subtitle": "Leather Handbag - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "9",
     "name": "Casual Backpack",
-    "category": "Bags",
+    "category": "Hand Bag",
     "price": 899,
-    "image": "https://images.unsplash.com/photo-1622560480654-d96214fdc887?w=600"
+    "image": "https://images.unsplash.com/photo-1622560480654-d96214fdc887?w=600",
+    "subtitle": "Casual Backpack - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "10",
     "name": "Travel Bag",
-    "category": "Bags",
+    "category": "Hand Bag",
     "price": 1599,
-    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600"
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600",
+    "subtitle": "Travel Bag - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "11",
     "name": "Office Laptop Bag",
-    "category": "Bags",
+    "category": "Hand Bag",
     "price": 1199,
-    "image": "https://images.unsplash.com/photo-1551232864-3f0890e580d9?w=600"
+    "image": "https://images.unsplash.com/photo-1551232864-3f0890e580d9?w=600",
+    "subtitle": "Office Laptop Bag - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "12",
     "name": "Mini Sling Bag",
-    "category": "Bags",
+    "category": "Hand Bag",
     "price": 699,
-    "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600"
+    "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600",
+    "subtitle": "Mini Sling Bag - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "13",
     "name": "School Backpack",
-    "category": "Bags",
+    "category": "Hand Bag",
     "price": 799,
-    "image": "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?w=600"
+    "image": "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?w=600",
+    "subtitle": "School Backpack - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "14",
     "name": "Designer Tote Bag",
-    "category": "Bags",
+    "category": "Hand Bag",
     "price": 1499,
-    "image": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600"
+    "image": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600",
+    "subtitle": "Designer Tote Bag - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
-
   {
     "id": "15",
     "name": "Casual T-Shirt",
-    "category": "Clothes",
+    "category": "Travel",
     "price": 499,
-    "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600"
+    "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600",
+    "subtitle": "Casual T-Shirt - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "16",
     "name": "Denim Jacket",
-    "category": "Clothes",
+    "category": "Travel",
     "price": 1499,
-    "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600"
+    "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600",
+    "subtitle": "Denim Jacket - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "17",
     "name": "Women's Dress",
-    "category": "Clothes",
+    "category": "Travel",
     "price": 999,
-    "image": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=600"
+    "image": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=600",
+    "subtitle": "Women's Dress - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "18",
     "name": "Classic Jeans",
-    "category": "Clothes",
+    "category": "Travel",
     "price": 1199,
-    "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=600"
+    "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=600",
+    "subtitle": "Classic Jeans - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "19",
     "name": "Formal Shirt",
-    "category": "Clothes",
+    "category": "Travel",
     "price": 799,
-    "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600"
+    "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600",
+    "subtitle": "Formal Shirt - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "20",
     "name": "Summer Top",
-    "category": "Clothes",
+    "category": "Travel",
     "price": 599,
-    "image": "https://images.unsplash.com/photo-1566206091558-7f218b696731?w=600"
+    "image": "https://images.unsplash.com/photo-1566206091558-7f218b696731?w=600",
+    "subtitle": "Summer Top - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "21",
     "name": "Winter Hoodie",
-    "category": "Clothes",
+    "category": "Travel",
     "price": 1299,
-    "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600"
+    "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600",
+    "subtitle": "Winter Hoodie - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
-
   {
     "id": "22",
     "name": "Modern Sofa",
     "category": "Furniture",
     "price": 18999,
-    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600"
+    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600",
+    "subtitle": "Modern Sofa - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "23",
     "name": "Wooden Chair",
     "category": "Furniture",
     "price": 3499,
-    "image": "https://images.unsplash.com/photo-1503602642458-232111445657?w=600"
+    "image": "https://images.unsplash.com/photo-1503602642458-232111445657?w=600",
+    "subtitle": "Wooden Chair - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "24",
     "name": "Coffee Table",
     "category": "Furniture",
     "price": 4999,
-    "image": "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=600"
+    "image": "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=600",
+    "subtitle": "Coffee Table - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "25",
     "name": "Modern Study Desk",
     "category": "Furniture",
     "price": 6999,
-    "image": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600"
+    "image": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600",
+    "subtitle": "Modern Study Desk - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "26",
     "name": "Bedside Table",
     "category": "Furniture",
     "price": 2999,
-    "image": "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=600"
+    "image": "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=600",
+    "subtitle": "Bedside Table - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "27",
     "name": "Comfortable Armchair",
     "category": "Furniture",
     "price": 8499,
-    "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600"
+    "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600",
+    "subtitle": "Comfortable Armchair - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "28",
     "name": "Wooden Bookshelf",
     "category": "Furniture",
     "price": 5499,
-    "image": "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=600"
+    "image": "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=600",
+    "subtitle": "Wooden Bookshelf - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
-
   {
     "id": "29",
     "name": "Wireless Headphones",
-    "category": "Electronics",
+    "category": "Tech",
     "price": 1999,
-    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600"
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600",
+    "subtitle": "Wireless Headphones - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "30",
     "name": "Smart Watch",
-    "category": "Electronics",
+    "category": "Tech",
     "price": 2499,
-    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600"
+    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600",
+    "subtitle": "Smart Watch - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "31",
     "name": "Bluetooth Speaker",
-    "category": "Electronics",
+    "category": "Tech",
     "price": 1499,
-    "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600"
+    "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600",
+    "subtitle": "Bluetooth Speaker - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "32",
     "name": "Wireless Mouse",
-    "category": "Electronics",
+    "category": "Tech",
     "price": 699,
-    "image": "https://images.unsplash.com/photo-1527814050087-3793815479db?w=600"
+    "image": "https://images.unsplash.com/photo-1527814050087-3793815479db?w=600",
+    "subtitle": "Wireless Mouse - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "33",
     "name": "Mechanical Keyboard",
-    "category": "Electronics",
+    "category": "Tech",
     "price": 2999,
-    "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600"
+    "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600",
+    "subtitle": "Mechanical Keyboard - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "34",
     "name": "Digital Camera",
-    "category": "Electronics",
+    "category": "Tech",
     "price": 24999,
-    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600"
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600",
+    "subtitle": "Digital Camera - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "35",
     "name": "Wireless Earbuds",
-    "category": "Electronics",
+    "category": "Tech",
     "price": 1799,
-    "image": "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=600"
+    "image": "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=600",
+    "subtitle": "Wireless Earbuds - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "36",
     "name": "Classic White Trainers",
     "category": "Sneakers",
     "price": 2499,
-    "image": "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600"
+    "image": "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600",
+    "subtitle": "Classic White Trainers - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "37",
     "name": "Running Air Sneakers",
     "category": "Sneakers",
     "price": 3299,
-    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600"
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600",
+    "subtitle": "Running Air Sneakers - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "38",
     "name": "Urban Street High-Tops",
     "category": "Sneakers",
     "price": 3999,
-    "image": "https://images.unsplash.com/photo-1552346154-21d32810baa3?w=600"
+    "image": "https://images.unsplash.com/photo-1552346154-21d32810baa3?w=600",
+    "subtitle": "Urban Street High-Tops - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "39",
     "name": "Minimalist Canvas Sneakers",
     "category": "Sneakers",
     "price": 1899,
-    "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600"
+    "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600",
+    "subtitle": "Minimalist Canvas Sneakers - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   },
   {
     "id": "40",
     "name": "Sport Performance Runners",
     "category": "Sneakers",
     "price": 4499,
-    "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600"
+    "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600",
+    "subtitle": "Sport Performance Runners - premium quality crafted",
+    "rating": 4.9,
+    "ratingCount": 121,
+    "stock": 12,
+    "color": "Standard"
   }
 ]

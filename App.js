@@ -13,6 +13,7 @@ import { COLORS } from './src/constants/theme';
 import HomeScreen from './src/screens/HomeScreen';
 import CategoriesTiles from './src/screens/CategoriesTiles';
 import CategoryItems from './src/screens/CategoryItems';
+import ProductDetail from './src/screens/ProductDetail';
 import CartItems from './src/screens/CartItems';
 
 const Tab = createBottomTabNavigator();
@@ -46,6 +47,11 @@ function CategoriesStack() {
         component={CategoryItems}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="ProductDetail"
+        component={ProductDetail}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
@@ -59,16 +65,21 @@ function AppTabs() {
       initialRouteName="HomeTab"
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: COLORS.primary,
-        tabBarInactiveTintColor: COLORS.textMuted,
+        tabBarActiveTintColor: '#FFFFFF',
+        tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.65)',
         tabBarStyle: {
-          backgroundColor: COLORS.surface,
-          borderTopWidth: 1,
-          borderTopColor: COLORS.border,
-          height: 62,
-          paddingTop: 6,
+          backgroundColor: COLORS.tabBar,
+          borderTopLeftRadius: 24,
+          borderTopRightRadius: 24,
+          height: 64,
+          paddingTop: 8,
           paddingBottom: 8,
-          elevation: 0,
+          borderTopWidth: 0,
+          elevation: 10,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: -3 },
+          shadowOpacity: 0.15,
+          shadowRadius: 8,
         },
         tabBarLabelStyle: {
           fontSize: 11,
@@ -117,7 +128,7 @@ function AppTabs() {
           tabBarLabel: 'Cart',
           tabBarBadge: totalItems > 0 ? totalItems : undefined,
           tabBarBadgeStyle: {
-            backgroundColor: COLORS.accent,
+            backgroundColor: '#FE6B0B',
             color: '#FFFFFF',
             fontSize: 10,
             fontWeight: '700',
@@ -128,8 +139,8 @@ function AppTabs() {
           },
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name={focused ? 'bag' : 'bag-outline'}
-              size={22}
+              name={focused ? 'cart' : 'cart-outline'}
+              size={23}
               color={color}
             />
           ),

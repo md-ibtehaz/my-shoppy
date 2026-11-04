@@ -14,6 +14,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
 import { CartContext } from '../context/CartContext';
+import BrandHeader from '../components/BrandHeader';
 import { COLORS, SPACING, RADIUS, SHADOWS } from '../constants/theme';
 import { formatPrice } from '../utils/format';
 
@@ -62,34 +63,38 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
-      {/* Top Brand Header */}
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.brandTitle}>MyShoppy</Text>
-          <Text style={styles.brandSubtitle}>Quality essentials for everyday</Text>
-        </View>
-
-        <TouchableOpacity
-          style={styles.cartIconButton}
-          onPress={() => navigation.navigate('Cart')}
-          activeOpacity={0.7}
-        >
-          <Ionicons name="bag-outline" size={22} color={COLORS.textPrimary} />
-          {totalItems > 0 && (
-            <View style={styles.headerBadge}>
-              <Text style={styles.headerBadgeText}>
-                {totalItems > 99 ? '99+' : totalItems}
-              </Text>
-            </View>
-          )}
-        </TouchableOpacity>
-      </View>
+      {/* Centered Brand Header matching Reference Image 1 Left */}
+      <BrandHeader centered={true} showRightIcons={false} />
 
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
+        {/* Department Store Hero Banner (matching user reference Image 1 Left) */}
+        <TouchableOpacity
+          style={styles.heroBannerCard}
+          activeOpacity={0.92}
+          onPress={() => navigation.navigate('CategoriesTab')}
+        >
+          <View style={styles.heroImageContainer}>
+            <Image
+              source={require('../../assets/banner-hero.png')}
+              style={styles.heroBannerImage}
+              resizeMode="cover"
+            />
+          </View>
+
+          <View style={styles.heroTextContainer}>
+            <Text style={styles.heroTitle}>
+              Shopping And Department Store.
+            </Text>
+            <Text style={styles.heroSubtitle}>
+              Shopping is a bit of a relaxing hobby for me, which is sometimes troubling for the bank balance.
+            </Text>
+          </View>
+        </TouchableOpacity>
+
         {/* Search Bar */}
         <View style={styles.searchContainer}>
           <Ionicons
@@ -118,35 +123,6 @@ export default function HomeScreen({ navigation }) {
 
         {!searchQuery.trim() && (
           <>
-            {/* Department Store Hero Banner (matching user reference inspiration) */}
-            <TouchableOpacity
-              style={styles.heroBannerCard}
-              activeOpacity={0.92}
-              onPress={() => navigation.navigate('CategoriesTab')}
-            >
-              <View style={styles.heroImageContainer}>
-                <Image
-                  source={require('../../assets/banner-hero.png')}
-                  style={styles.heroBannerImage}
-                  resizeMode="cover"
-                />
-              </View>
-
-              <View style={styles.heroTextContainer}>
-                <Text style={styles.heroTitle}>
-                  Shopping And Department Store.
-                </Text>
-                <Text style={styles.heroSubtitle}>
-                  Shopping is a bit of a relaxing hobby for me, which is sometimes troubling for the bank balance.
-                </Text>
-
-                <View style={styles.heroCTAButton}>
-                  <Text style={styles.heroCTAText}>Explore All Categories</Text>
-                  <Ionicons name="arrow-forward" size={15} color="#FFFFFF" />
-                </View>
-              </View>
-            </TouchableOpacity>
-
             {/* Quick Category Pills */}
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Categories</Text>
@@ -438,17 +414,13 @@ const styles = StyleSheet.create({
   },
   heroBannerCard: {
     backgroundColor: '#AEDFEE',
-    marginHorizontal: SPACING.md,
-    marginBottom: SPACING.lg,
-    borderRadius: 20,
+    marginHorizontal: 0,
+    marginBottom: SPACING.md,
     overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: 'rgba(0, 56, 46, 0.08)',
-    ...SHADOWS.md,
   },
   heroImageContainer: {
     width: '100%',
-    height: 230,
+    height: Math.round(width * 0.95),
     backgroundColor: '#7EE7FD',
   },
   heroBannerImage: {
@@ -456,25 +428,24 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   heroTextContainer: {
-    paddingHorizontal: 18,
-    paddingTop: 16,
-    paddingBottom: 18,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 26,
     backgroundColor: '#AEDFEE',
   },
   heroTitle: {
-    fontSize: 23,
+    fontSize: 28,
     fontWeight: '800',
     color: '#00382E',
-    letterSpacing: -0.4,
-    lineHeight: 29,
-    marginBottom: 8,
+    letterSpacing: -0.5,
+    lineHeight: 34,
+    marginBottom: 10,
   },
   heroSubtitle: {
-    fontSize: 13,
-    lineHeight: 19,
+    fontSize: 14,
+    lineHeight: 20,
     color: '#134E4A',
     fontWeight: '500',
-    marginBottom: 14,
   },
   heroCTAButton: {
     flexDirection: 'row',

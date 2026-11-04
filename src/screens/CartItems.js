@@ -14,6 +14,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { CartContext } from '../context/CartContext';
 import { COLORS, SPACING, RADIUS, SHADOWS } from '../constants/theme';
 import { formatPrice } from '../utils/format';
+import BrandHeader from '../components/BrandHeader';
+import OrderSuccessModal from '../components/OrderSuccessModal';
+import { getProductImage } from '../utils/assetMap';
 
 const HORIZONTAL_PADDING = 18;
 
@@ -48,22 +51,8 @@ export default function CartItems({ navigation }) {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
-      {/* Top Brand Bar with Heart and Profile Icons (as in Reference Image 3) */}
-      <View style={styles.topBar}>
-        <View style={styles.brandWrapper}>
-          <Text style={styles.brandText}>MyShoppy</Text>
-          <View style={styles.brandUnderline} />
-        </View>
-
-        <View style={styles.topIconsGroup}>
-          <TouchableOpacity style={styles.iconBtn} activeOpacity={0.7}>
-            <Ionicons name="heart-outline" size={22} color={COLORS.textPrimary} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.iconBtn} activeOpacity={0.7}>
-            <Ionicons name="person-circle-outline" size={24} color={COLORS.textPrimary} />
-          </TouchableOpacity>
-        </View>
-      </View>
+      {/* Universal Brand Header (matching Reference Images 1 & 2) */}
+      <BrandHeader showRightIcons={true} />
 
       <ScrollView
         style={styles.container}
@@ -79,9 +68,9 @@ export default function CartItems({ navigation }) {
             {cart.map((item) => (
               <View key={item.id} style={styles.cartItem}>
                 <Image
-                  source={{ uri: item.image }}
+                  source={getProductImage(item) || { uri: item.image }}
                   style={styles.itemImage}
-                  resizeMode="cover"
+                  resizeMode="contain"
                 />
 
                 <View style={styles.itemDetails}>
@@ -234,9 +223,9 @@ export default function CartItems({ navigation }) {
                     {order.items.map((item, index) => (
                       <View key={`${order.id}-${item.id}-${index}`} style={styles.thumbnailWrapper}>
                         <Image
-                          source={{ uri: item.image }}
+                          source={getProductImage(item) || { uri: item.image }}
                           style={styles.orderItemImage}
-                          resizeMode="cover"
+                          resizeMode="contain"
                         />
                         <View style={styles.qtyBadge}>
                           <Text style={styles.qtyBadgeText}>x{item.quantity || 1}</Text>
@@ -265,49 +254,12 @@ export default function CartItems({ navigation }) {
         )}
       </ScrollView>
 
-      {/* Order Success Modal */}
-      <Modal
+      {/* Order Success Modal Matching Reference Image 2 Right */}
+      <OrderSuccessModal
         visible={modalVisible}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalCard}>
-            <View style={styles.modalIconCircle}>
-              <Ionicons name="checkmark-circle" size={54} color={COLORS.success} />
-            </View>
-
-            <Text style={styles.modalTitle}>Order Placed Successfully!</Text>
-            <Text style={styles.modalSubtitle}>
-              Your order has been recorded and is now viewable in Recent Orders.
-            </Text>
-
-            {completedOrder && (
-              <View style={styles.modalSummaryBox}>
-                <View style={styles.modalSummaryRow}>
-                  <Text style={styles.modalSummaryLabel}>Transaction ID</Text>
-                  <Text style={styles.modalSummaryValue}>{completedOrder.id}</Text>
-                </View>
-                <View style={styles.modalSummaryRow}>
-                  <Text style={styles.modalSummaryLabel}>Total Paid</Text>
-                  <Text style={styles.modalSummaryValue}>
-                    {formatPrice(completedOrder.total)}
-                  </Text>
-                </View>
-              </View>
-            )}
-
-            <TouchableOpacity
-              style={styles.modalDoneBtn}
-              onPress={handleContinueShopping}
-              activeOpacity={0.85}
-            >
-              <Text style={styles.modalDoneText}>Continue Shopping</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+        transactionId={completedOrder?.id}
+        onContinueShopping={handleContinueShopping}
+      />
     </SafeAreaView>
   );
 }
@@ -509,9 +461,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.primary,
-    paddingVertical: 13,
-    borderRadius: RADIUS.sm,
+    backgroundColor: '#3E6867',
+    paddingVertical: 14,
+    borderRadius: 22,
     gap: SPACING.xs,
   },
   placeOrderText: {

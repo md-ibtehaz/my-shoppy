@@ -12,9 +12,11 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
+import BrandHeader from '../components/BrandHeader';
 import { CartContext } from '../context/CartContext';
 import { COLORS, SPACING, RADIUS, SHADOWS } from '../constants/theme';
 import { formatPrice } from '../utils/format';
+import { getProductImage } from '../utils/assetMap';
 import products from '../data/products.json';
 
 const { width } = Dimensions.get('window');
@@ -23,19 +25,35 @@ const GAP = 12;
 const CARD_WIDTH = (width - (HORIZONTAL_PADDING * 2) - GAP) / 2;
 
 export default function CategoryItems({ route, navigation }) {
-  const categoryName = route?.params?.categoryName || 'Products';
+  const rawCategory = route?.params?.categoryName || 'Tech';
+  const displaySubcategory =
+    rawCategory.toLowerCase() === 'tech' ? 'Headphones' : rawCategory;
+
   const { addToCart, updateQuantity, getItemQuantity } = useContext(CartContext);
 
   // Modal State matching Reference Image 2
   const [modalVisible, setModalVisible] = useState(false);
   const [addedItem, setAddedItem] = useState(null);
+  const [wishlist, setWishlist] = useState({});
 
-  // Filter products by category
-  const filteredProducts = categoryName
-    ? products.filter(
-        (item) => item.category?.toLowerCase() === categoryName.toLowerCase()
-      )
-    : [];
+  const toggleWishlist = (id) => {
+    setWishlist((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  // Filter products by category or subcategory
+  const filteredProducts = products.filter((item) => {
+    const cat = (item.category || '').toLowerCase();
+    const sub = (item.subCategory || '').toLowerCase();
+    const target = rawCategory.toLowerCase();
+
+    if (target === 'tech' || target === 'headphones') {
+      return cat === 'tech' || sub === 'headphones' || cat === 'electronics';
+    }
+    if (target === 'hand bag' || target === 'bags') {
+      return cat === 'hand bag' || cat === 'bags';
+    }
+    return cat === target || sub === target;
+  });
 
   const handleAddToCart = (item) => {
     addToCart(item);
@@ -43,22 +61,41 @@ export default function CategoryItems({ route, navigation }) {
     setModalVisible(true);
   };
 
+  const handleProductPress = (item) => {
+    navigation.navigate('ProductDetail', { product: item });
+  };
+
   const renderProduct = ({ item }) => {
     const inCartCount = getItemQuantity(item.id);
+    const isFav = !!wishlist[item.id];
+    const imageSource = getProductImage(item);
 
     return (
-      <View style={styles.productCard}>
-        {/* Product Image & Wishlist Button */}
+      <TouchableOpacity
+        style={styles.productCard}
+        onPress={() => handleProductPress(item)}
+        activeOpacity={0.92}
+      >
+        {/* Wishlist Button (Top Right) */}
+        <TouchableOpacity
+          style={styles.favoriteBtn}
+          onPress={() => toggleWishlist(item.id)}
+          activeOpacity={0.7}
+        >
+          <Ionicons
+            name={isFav ? 'heart' : 'heart-outline'}
+            size={16}
+            color={isFav ? '#EF4444' : '#64748B'}
+          />
+        </TouchableOpacity>
+
+        {/* Product Image */}
         <View style={styles.imageContainer}>
           <Image
-            source={{ uri: item.image }}
+            source={imageSource}
             style={styles.productImage}
-            resizeMode="cover"
+            resizeMode="contain"
           />
-
-          <TouchableOpacity style={styles.favoriteBtn} activeOpacity={0.7}>
-            <Ionicons name="heart-outline" size={17} color={COLORS.textSecondary} />
-          </TouchableOpacity>
 
           {inCartCount > 0 && (
             <View style={styles.inCartBadge}>
@@ -73,13 +110,24 @@ export default function CategoryItems({ route, navigation }) {
             {item.name}
           </Text>
 
-          <Text style={styles.categorySubtext}>
-            {item.category}
+          <Text style={styles.categorySubtext} numberOfLines={1}>
+            {item.subtitle || 'Organic Cotton, fairtrade certified'}
           </Text>
 
+          {/* Rating Stars (Green Stars matching Image 2 Left) */}
+          <View style={styles.ratingRow}>
+            <View style={styles.starsGroup}>
+              {[1, 2, 3, 4, 5].map((s) => (
+                <Ionicons key={s} name="star" size={11} color="#22C55E" />
+              ))}
+            </View>
+            <Text style={styles.ratingCount}>({item.ratingCount || 121})</Text>
+          </View>
+
+          {/* Price */}
           <Text style={styles.productPrice}>{formatPrice(item.price)}</Text>
 
-          {/* Add to Cart or Quantity Stepper */}
+          {/* Add to Cart or Stepper Button */}
           {inCartCount > 0 ? (
             <View style={styles.stepperContainer}>
               <TouchableOpacity
@@ -104,32 +152,27 @@ export default function CategoryItems({ route, navigation }) {
             <TouchableOpacity
               style={styles.addButton}
               onPress={() => handleAddToCart(item)}
-              activeOpacity={0.82}
+              activeOpacity={0.85}
             >
               <Text style={styles.addButtonText}>Add to Cart</Text>
             </TouchableOpacity>
           )}
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      {/* Category Breadcrumb & Heading Bar (as in Reference Image 2) */}
-      <View style={styles.headerBar}>
-        <TouchableOpacity
-          style={styles.backBtn}
-          onPress={() => navigation.goBack()}
-          activeOpacity={0.7}
-        >
-          <Ionicons name="arrow-back" size={20} color={COLORS.textPrimary} />
-        </TouchableOpacity>
+      {/* Universal Brand Header (MyShoppy + Right Battery/Signal/Profile Icons) */}
+      <BrandHeader showBack onBack={() => navigation.goBack()} />
 
-        <View style={styles.titleColumn}>
-          <Text style={styles.breadcrumbText}>Categories / {categoryName}</Text>
-          <Text style={styles.headingText}>{categoryName} For You!</Text>
-        </View>
+      {/* Subcategory Breadcrumbs & Heading (Matching Image 2 Left) */}
+      <View style={styles.headerBar}>
+        <Text style={styles.breadcrumbText}>
+          Categories/ {displaySubcategory}
+        </Text>
+        <Text style={styles.headingText}>{displaySubcategory} For You!</Text>
       </View>
 
       {/* Product Grid */}
@@ -145,12 +188,10 @@ export default function CategoryItems({ route, navigation }) {
         />
       ) : (
         <View style={styles.emptyContainer}>
-          <View style={styles.emptyIconCircle}>
-            <Ionicons name="cube-outline" size={38} color={COLORS.textMuted} />
-          </View>
+          <Ionicons name="cube-outline" size={48} color={COLORS.textMuted} />
           <Text style={styles.emptyTitle}>No Products Available</Text>
           <Text style={styles.emptyText}>
-            We don't have items listed in {categoryName} right now.
+            No products listed under {displaySubcategory} yet.
           </Text>
           <TouchableOpacity
             style={styles.backButton}
@@ -162,7 +203,7 @@ export default function CategoryItems({ route, navigation }) {
         </View>
       )}
 
-      {/* Exact Custom "Added to Cart!" Popup Modal matching Reference Image 2 */}
+      {/* Reusable Added to Cart Popup Modal */}
       <Modal
         visible={modalVisible}
         transparent
@@ -171,21 +212,18 @@ export default function CategoryItems({ route, navigation }) {
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalCard}>
-            {/* Success Checkmark Circle */}
             <View style={styles.modalIconCircle}>
               <Ionicons name="checkmark" size={30} color="#FFFFFF" />
             </View>
 
-            {/* Title */}
             <Text style={styles.modalTitle}>Added to Cart!</Text>
 
-            {/* Item Preview Card Box */}
             {addedItem && (
               <View style={styles.snippetBox}>
                 <Image
-                  source={{ uri: addedItem.image }}
+                  source={getProductImage(addedItem)}
                   style={styles.snippetImage}
-                  resizeMode="cover"
+                  resizeMode="contain"
                 />
                 <View style={styles.snippetDetails}>
                   <Text style={styles.snippetName} numberOfLines={1}>
@@ -198,12 +236,10 @@ export default function CategoryItems({ route, navigation }) {
               </View>
             )}
 
-            {/* Subtitle Description */}
             <Text style={styles.modalSubtitle}>
               This item has been successfully placed in your shopping bag.
             </Text>
 
-            {/* OK Button */}
             <TouchableOpacity
               style={styles.modalOkBtn}
               onPress={() => setModalVisible(false)}
@@ -221,42 +257,28 @@ export default function CategoryItems({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: '#FAFBFB',
   },
   headerBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
     paddingHorizontal: HORIZONTAL_PADDING,
-    paddingVertical: SPACING.sm,
+    paddingTop: 4,
+    paddingBottom: 10,
     backgroundColor: COLORS.surface,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
-  },
-  backBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: RADIUS.full,
-    backgroundColor: COLORS.surfaceMuted,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: SPACING.sm,
-  },
-  titleColumn: {
-    flex: 1,
   },
   breadcrumbText: {
-    fontSize: 11,
-    color: COLORS.textMuted,
-    fontWeight: '500',
+    fontSize: 13,
+    color: '#0F172A',
+    fontWeight: '700',
+    marginBottom: 2,
   },
   headingText: {
-    fontSize: 17,
-    fontWeight: '700',
-    color: COLORS.textPrimary,
-    marginTop: 1,
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#0F172A',
   },
   listContent: {
     padding: HORIZONTAL_PADDING,
+    paddingTop: 12,
     paddingBottom: SPACING.xl,
   },
   row: {
@@ -266,94 +288,115 @@ const styles = StyleSheet.create({
   productCard: {
     width: CARD_WIDTH,
     backgroundColor: COLORS.surface,
-    borderRadius: 16,
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: COLORS.border,
+    borderColor: '#E8ECED',
     overflow: 'hidden',
+    padding: 10,
     ...SHADOWS.sm,
-  },
-  imageContainer: {
-    width: '100%',
-    height: CARD_WIDTH * 0.95,
-    backgroundColor: COLORS.surfaceMuted,
-    position: 'relative',
-  },
-  productImage: {
-    width: '100%',
-    height: '100%',
   },
   favoriteBtn: {
     position: 'absolute',
     top: 8,
     right: 8,
-    width: 30,
-    height: 30,
-    borderRadius: RADIUS.full,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
     justifyContent: 'center',
     alignItems: 'center',
-    ...SHADOWS.sm,
+    zIndex: 10,
+    borderWidth: 1,
+    borderColor: '#F1F5F9',
+  },
+  imageContainer: {
+    width: '100%',
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FAFBFB',
+    borderRadius: 10,
+    marginBottom: 8,
+    position: 'relative',
+  },
+  productImage: {
+    width: '85%',
+    height: '85%',
   },
   inCartBadge: {
     position: 'absolute',
-    bottom: 8,
-    left: 8,
-    backgroundColor: COLORS.accent,
-    paddingHorizontal: 7,
+    bottom: 4,
+    left: 4,
+    backgroundColor: COLORS.primary,
+    paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: RADIUS.full,
   },
   inCartBadgeText: {
     color: '#FFFFFF',
-    fontSize: 9,
+    fontSize: 8.5,
     fontWeight: '700',
   },
   productDetails: {
-    padding: 12,
+    paddingHorizontal: 2,
   },
   productName: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: COLORS.textPrimary,
+    fontSize: 12.5,
+    fontWeight: '700',
+    color: '#0F172A',
     marginBottom: 2,
   },
   categorySubtext: {
-    fontSize: 11,
-    color: COLORS.textMuted,
+    fontSize: 9.5,
+    color: '#64748B',
+    marginBottom: 6,
+    lineHeight: 13,
+  },
+  ratingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 6,
   },
+  starsGroup: {
+    flexDirection: 'row',
+    marginRight: 4,
+  },
+  ratingCount: {
+    fontSize: 9,
+    color: '#64748B',
+    fontWeight: '500',
+  },
   productPrice: {
-    fontSize: 15,
-    fontWeight: '700',
-    color: COLORS.accent,
-    marginBottom: 10,
+    fontSize: 14,
+    fontWeight: '800',
+    color: '#0F172A',
+    marginBottom: 8,
   },
   addButton: {
-    backgroundColor: COLORS.primary,
-    paddingVertical: 9,
-    borderRadius: 9,
+    backgroundColor: COLORS.primary, // Dark teal from theme
+    paddingVertical: 7,
+    borderRadius: 8,
     alignItems: 'center',
-    height: 38,
     justifyContent: 'center',
   },
   addButtonText: {
     color: '#FFFFFF',
-    fontWeight: '600',
-    fontSize: 13,
+    fontWeight: '700',
+    fontSize: 11.5,
   },
   stepperContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: COLORS.primary,
-    borderRadius: 9,
-    paddingHorizontal: 5,
-    height: 38,
+    borderRadius: 8,
+    paddingHorizontal: 6,
+    height: 32,
   },
   stepperBtn: {
-    width: 28,
-    height: 28,
-    borderRadius: RADIUS.full,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
     backgroundColor: 'rgba(255, 255, 255, 0.22)',
     justifyContent: 'center',
     alignItems: 'center',
@@ -361,50 +404,39 @@ const styles = StyleSheet.create({
   stepperQuantityText: {
     color: '#FFFFFF',
     fontWeight: '700',
-    fontSize: 14,
-    paddingHorizontal: 8,
+    fontSize: 12,
   },
   emptyContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: SPACING.xl,
-  },
-  emptyIconCircle: {
-    width: 68,
-    height: 68,
-    borderRadius: RADIUS.full,
-    backgroundColor: COLORS.surfaceMuted,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: SPACING.md,
+    padding: 32,
+    marginTop: 40,
   },
   emptyTitle: {
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: '#0F172A',
+    marginTop: 12,
     marginBottom: 4,
   },
   emptyText: {
-    color: COLORS.textSecondary,
-    fontSize: 13,
+    color: '#64748B',
+    fontSize: 12.5,
     textAlign: 'center',
-    lineHeight: 18,
-    marginBottom: SPACING.lg,
+    marginBottom: 20,
   },
   backButton: {
     backgroundColor: COLORS.primary,
-    paddingHorizontal: SPACING.lg,
+    paddingHorizontal: 20,
     paddingVertical: 10,
-    borderRadius: RADIUS.sm,
+    borderRadius: 8,
   },
   backButtonText: {
     color: '#FFFFFF',
     fontWeight: '600',
     fontSize: 13,
   },
-
-  // Modal Styles (Matching Reference Image 2)
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(15, 23, 42, 0.55)',
@@ -417,42 +449,42 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     padding: 24,
     width: '100%',
-    maxWidth: 330,
+    maxWidth: 320,
     alignItems: 'center',
     ...SHADOWS.lg,
   },
   modalIconCircle: {
-    width: 54,
-    height: 54,
-    borderRadius: 27,
-    backgroundColor: COLORS.accent,
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    backgroundColor: '#22C55E',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 4,
   },
   modalTitle: {
-    fontSize: 19,
-    fontWeight: '700',
-    color: COLORS.textPrimary,
+    fontSize: 18,
+    fontWeight: '800',
+    color: '#0F172A',
     marginTop: 10,
     textAlign: 'center',
   },
   snippetBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.background,
+    backgroundColor: '#F8FAFC',
     borderRadius: 12,
     padding: 10,
-    marginTop: 16,
+    marginTop: 14,
     width: '100%',
     borderWidth: 1,
-    borderColor: COLORS.border,
+    borderColor: '#E2E8F0',
   },
   snippetImage: {
-    width: 46,
-    height: 46,
+    width: 44,
+    height: 44,
     borderRadius: 8,
-    backgroundColor: COLORS.surfaceMuted,
+    backgroundColor: '#F1F5F9',
   },
   snippetDetails: {
     flex: 1,
@@ -460,34 +492,33 @@ const styles = StyleSheet.create({
   },
   snippetName: {
     fontSize: 12,
-    fontWeight: '600',
-    color: COLORS.textPrimary,
+    fontWeight: '700',
+    color: '#0F172A',
     marginBottom: 2,
   },
   snippetPrice: {
     fontSize: 13,
     fontWeight: '700',
-    color: COLORS.accent,
+    color: COLORS.primary,
   },
   modalSubtitle: {
     fontSize: 12,
-    color: COLORS.textSecondary,
+    color: '#64748B',
     textAlign: 'center',
-    lineHeight: 18,
-    marginTop: 14,
-    marginBottom: 20,
-    paddingHorizontal: 8,
+    lineHeight: 17,
+    marginTop: 12,
+    marginBottom: 18,
   },
   modalOkBtn: {
     width: '100%',
     backgroundColor: COLORS.primary,
-    paddingVertical: 12,
+    paddingVertical: 11,
     borderRadius: 10,
     alignItems: 'center',
   },
   modalOkText: {
     color: '#FFFFFF',
-    fontSize: 14,
+    fontSize: 13.5,
     fontWeight: '700',
   },
 });

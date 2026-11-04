@@ -3,22 +3,24 @@ import {
   View,
   Text,
   StyleSheet,
-  ImageBackground,
+  Image,
   TouchableOpacity,
   ScrollView,
   Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
 
+import BrandHeader from '../components/BrandHeader';
 import { COLORS, SPACING, RADIUS, SHADOWS } from '../constants/theme';
+import { getCategoryImage } from '../utils/assetMap';
 import categoriesData from '../data/categories.json';
 
 const { width } = Dimensions.get('window');
-// 2-column grid calculation with exact padding and gap matching reference Image 1
 const HORIZONTAL_PADDING = 18;
 const GAP = 14;
 const CARD_WIDTH = (width - (HORIZONTAL_PADDING * 2) - GAP) / 2;
+// Aspect ratio matching Image 1 Right (approx 1:1.15)
+const CARD_HEIGHT = Math.round(CARD_WIDTH * 1.15);
 
 export default function CategoriesTiles({ navigation }) {
   const handleCategoryPress = (category) => {
@@ -29,22 +31,8 @@ export default function CategoriesTiles({ navigation }) {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
-      {/* Top Brand Bar with Heart and Profile Icons (as in Reference Image 1) */}
-      <View style={styles.topBar}>
-        <View style={styles.brandWrapper}>
-          <Text style={styles.brandText}>MyShoppy</Text>
-          <View style={styles.brandUnderline} />
-        </View>
-
-        <View style={styles.topIconsGroup}>
-          <TouchableOpacity style={styles.iconBtn} activeOpacity={0.7}>
-            <Ionicons name="heart-outline" size={22} color={COLORS.textPrimary} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.iconBtn} activeOpacity={0.7}>
-            <Ionicons name="person-circle-outline" size={24} color={COLORS.textPrimary} />
-          </TouchableOpacity>
-        </View>
-      </View>
+      {/* Brand Header with MyShoppy + Battery/Signal/Profile Icons */}
+      <BrandHeader showRightIcons={true} />
 
       <ScrollView
         style={styles.container}
@@ -54,30 +42,32 @@ export default function CategoriesTiles({ navigation }) {
         {/* Categories Section Heading */}
         <Text style={styles.sectionHeading}>Categories</Text>
 
-        {/* 2-Column Full-Image Background Tiles */}
+        {/* 2-Column Category Grid Matching Reference Image 1 Right */}
         <View style={styles.categoryGrid}>
-          {categoriesData.map((category) => (
-            <TouchableOpacity
-              key={category.id}
-              style={styles.categoryCard}
-              activeOpacity={0.88}
-              onPress={() => handleCategoryPress(category)}
-            >
-              <ImageBackground
-                source={{ uri: category.image }}
-                style={styles.tileBackground}
-                imageStyle={styles.tileImage}
-                resizeMode="cover"
+          {categoriesData.map((category) => {
+            const imageSource = getCategoryImage(category.name);
+
+            return (
+              <TouchableOpacity
+                key={category.id}
+                style={styles.categoryCard}
+                activeOpacity={0.88}
+                onPress={() => handleCategoryPress(category)}
               >
-                {/* Full-bleed dark tint overlay for readability */}
-                <View style={styles.overlay}>
-                  <Text style={styles.categoryTitle} numberOfLines={2}>
-                    {category.name}
-                  </Text>
-                </View>
-              </ImageBackground>
-            </TouchableOpacity>
-          ))}
+                {imageSource ? (
+                  <Image
+                    source={imageSource}
+                    style={styles.tileImage}
+                    resizeMode="cover"
+                  />
+                ) : (
+                  <View style={styles.fallbackBox}>
+                    <Text style={styles.fallbackTitle}>{category.name}</Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+            );
+          })}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -89,60 +79,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.surface,
   },
-  topBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: HORIZONTAL_PADDING,
-    paddingTop: SPACING.xs,
-    paddingBottom: SPACING.sm,
-    backgroundColor: COLORS.surface,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.borderLight,
-  },
-  brandWrapper: {
-    alignItems: 'flex-start',
-  },
-  brandText: {
-    fontSize: 22,
-    fontWeight: '800',
-    color: COLORS.primary,
-    fontStyle: 'italic',
-    letterSpacing: -0.3,
-  },
-  brandUnderline: {
-    width: 65,
-    height: 2.5,
-    backgroundColor: COLORS.accent,
-    borderRadius: 2,
-    marginTop: 2,
-  },
-  topIconsGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-  iconBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: RADIUS.full,
-    backgroundColor: COLORS.surfaceMuted,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   container: {
     flex: 1,
     backgroundColor: COLORS.surface,
   },
   scrollContent: {
     paddingHorizontal: HORIZONTAL_PADDING,
-    paddingTop: SPACING.md,
+    paddingTop: SPACING.sm,
     paddingBottom: SPACING.xl,
   },
   sectionHeading: {
     fontSize: 22,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: '#446E6C',
     marginBottom: SPACING.md,
     letterSpacing: -0.3,
   },
@@ -154,36 +103,27 @@ const styles = StyleSheet.create({
   },
   categoryCard: {
     width: CARD_WIDTH,
-    height: 128,
-    borderRadius: 18,
+    height: CARD_HEIGHT,
+    borderRadius: 16,
     overflow: 'hidden',
-    backgroundColor: COLORS.surfaceMuted,
-    borderWidth: 1,
-    borderColor: COLORS.border,
+    backgroundColor: '#F1F5F9',
     ...SHADOWS.sm,
   },
-  tileBackground: {
+  tileImage: {
     width: '100%',
     height: '100%',
+    borderRadius: 16,
   },
-  tileImage: {
-    borderRadius: 17,
-  },
-  overlay: {
+  fallbackBox: {
     flex: 1,
-    backgroundColor: 'rgba(15, 23, 42, 0.42)',
+    backgroundColor: COLORS.surfaceMuted,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 12,
+    padding: SPACING.sm,
   },
-  categoryTitle: {
-    color: '#FFFFFF',
-    fontSize: 17,
-    fontWeight: '800',
-    textAlign: 'center',
-    letterSpacing: 0.3,
-    textShadowColor: 'rgba(0, 0, 0, 0.45)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 3,
+  fallbackTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: COLORS.primary,
   },
 });
