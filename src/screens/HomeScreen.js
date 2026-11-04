@@ -118,24 +118,34 @@ export default function HomeScreen({ navigation }) {
 
         {!searchQuery.trim() && (
           <>
-            {/* Minimalist Editorial Banner */}
-            <View style={styles.heroBanner}>
-              <View style={styles.heroBadge}>
-                <Text style={styles.heroBadgeText}>CURATED FOR YOU</Text>
+            {/* Department Store Hero Banner (matching user reference inspiration) */}
+            <TouchableOpacity
+              style={styles.heroBannerCard}
+              activeOpacity={0.92}
+              onPress={() => navigation.navigate('CategoriesTab')}
+            >
+              <View style={styles.heroImageContainer}>
+                <Image
+                  source={require('../../assets/banner-hero.png')}
+                  style={styles.heroBannerImage}
+                  resizeMode="cover"
+                />
               </View>
-              <Text style={styles.heroTitle}>Simplicity & Quality</Text>
-              <Text style={styles.heroSubtitle}>
-                Explore everyday essentials crafted with care. Enjoy free delivery on all orders.
-              </Text>
-              <TouchableOpacity
-                style={styles.heroCTA}
-                onPress={() => navigation.navigate('CategoriesTab')}
-                activeOpacity={0.85}
-              >
-                <Text style={styles.heroCTAText}>Browse All Categories</Text>
-                <Ionicons name="arrow-forward" size={15} color={COLORS.primary} />
-              </TouchableOpacity>
-            </View>
+
+              <View style={styles.heroTextContainer}>
+                <Text style={styles.heroTitle}>
+                  Shopping And Department Store.
+                </Text>
+                <Text style={styles.heroSubtitle}>
+                  Shopping is a bit of a relaxing hobby for me, which is sometimes troubling for the bank balance.
+                </Text>
+
+                <View style={styles.heroCTAButton}>
+                  <Text style={styles.heroCTAText}>Explore All Categories</Text>
+                  <Ionicons name="arrow-forward" size={15} color="#FFFFFF" />
+                </View>
+              </View>
+            </TouchableOpacity>
 
             {/* Quick Category Pills */}
             <View style={styles.sectionHeader}>
@@ -426,52 +436,58 @@ const styles = StyleSheet.create({
   clearSearchBtn: {
     padding: SPACING.xs,
   },
-  heroBanner: {
-    backgroundColor: COLORS.primary,
+  heroBannerCard: {
+    backgroundColor: '#AEDFEE',
     marginHorizontal: SPACING.md,
     marginBottom: SPACING.lg,
-    borderRadius: RADIUS.lg,
-    padding: SPACING.lg,
+    borderRadius: 20,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: 'rgba(0, 56, 46, 0.08)',
+    ...SHADOWS.md,
   },
-  heroBadge: {
-    alignSelf: 'flex-start',
-    backgroundColor: 'rgba(255, 255, 255, 0.12)',
-    paddingHorizontal: SPACING.sm,
-    paddingVertical: 3,
-    borderRadius: RADIUS.full,
-    marginBottom: SPACING.sm,
+  heroImageContainer: {
+    width: '100%',
+    height: 230,
+    backgroundColor: '#7EE7FD',
   },
-  heroBadgeText: {
-    color: '#E2E8F0',
-    fontSize: 10,
-    fontWeight: '700',
-    letterSpacing: 0.8,
+  heroBannerImage: {
+    width: '100%',
+    height: '100%',
+  },
+  heroTextContainer: {
+    paddingHorizontal: 18,
+    paddingTop: 16,
+    paddingBottom: 18,
+    backgroundColor: '#AEDFEE',
   },
   heroTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#FFFFFF',
-    letterSpacing: -0.3,
-    marginBottom: SPACING.xs,
+    fontSize: 23,
+    fontWeight: '800',
+    color: '#00382E',
+    letterSpacing: -0.4,
+    lineHeight: 29,
+    marginBottom: 8,
   },
   heroSubtitle: {
     fontSize: 13,
     lineHeight: 19,
-    color: '#94A3B8',
-    marginBottom: SPACING.md,
+    color: '#134E4A',
+    fontWeight: '500',
+    marginBottom: 14,
   },
-  heroCTA: {
+  heroCTAButton: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    backgroundColor: '#FFFFFF',
-    paddingHorizontal: SPACING.md,
+    backgroundColor: '#00382E',
+    paddingHorizontal: 16,
     paddingVertical: 9,
-    borderRadius: RADIUS.sm,
+    borderRadius: RADIUS.full,
     gap: 6,
   },
   heroCTAText: {
-    color: COLORS.primary,
+    color: '#FFFFFF',
     fontSize: 13,
     fontWeight: '700',
   },
