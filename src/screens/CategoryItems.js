@@ -52,6 +52,9 @@ export default function CategoryItems({ route, navigation }) {
     if (target === 'hand bag' || target === 'bags') {
       return cat === 'hand bag' || cat === 'bags';
     }
+    if (target === 'cloth' || target === 'clothing') {
+      return cat === 'cloth' || cat === 'clothing' || sub === 'cloth' || sub === 'clothing';
+    }
     return cat === target || sub === target;
   });
 

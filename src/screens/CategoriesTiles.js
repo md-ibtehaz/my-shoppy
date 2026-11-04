@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
+  ImageBackground,
   TouchableOpacity,
   ScrollView,
   Dimensions,
@@ -11,16 +11,16 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BrandHeader from '../components/BrandHeader';
-import { COLORS, SPACING, RADIUS, SHADOWS } from '../constants/theme';
+import { COLORS, SPACING, SHADOWS } from '../constants/theme';
 import { getCategoryImage } from '../utils/assetMap';
 import categoriesData from '../data/categories.json';
 
 const { width } = Dimensions.get('window');
-const HORIZONTAL_PADDING = 18;
-const GAP = 14;
+const HORIZONTAL_PADDING = 16;
+const GAP = 12;
 const CARD_WIDTH = (width - (HORIZONTAL_PADDING * 2) - GAP) / 2;
-// Aspect ratio matching Image 1 Right (approx 1:1.15)
-const CARD_HEIGHT = Math.round(CARD_WIDTH * 1.15);
+// Fitted height so all 3 rows fit gracefully on mobile screens without cut-off
+const CARD_HEIGHT = Math.max(120, Math.min(144, Math.round(width * 0.38)));
 
 export default function CategoriesTiles({ navigation }) {
   const handleCategoryPress = (category) => {
@@ -42,7 +42,7 @@ export default function CategoriesTiles({ navigation }) {
         {/* Categories Section Heading */}
         <Text style={styles.sectionHeading}>Categories</Text>
 
-        {/* 2-Column Category Grid Matching Reference Image 1 Right */}
+        {/* 2-Column High-Definition Category Grid Matching Reference */}
         <View style={styles.categoryGrid}>
           {categoriesData.map((category) => {
             const imageSource = getCategoryImage(category.name);
@@ -55,11 +55,17 @@ export default function CategoriesTiles({ navigation }) {
                 onPress={() => handleCategoryPress(category)}
               >
                 {imageSource ? (
-                  <Image
+                  <ImageBackground
                     source={imageSource}
-                    style={styles.tileImage}
+                    style={styles.tileBackground}
+                    imageStyle={styles.tileImage}
                     resizeMode="cover"
-                  />
+                  >
+                    {/* Subtle top vignette overlay for crystal sharp HD contrast */}
+                    <View style={styles.overlay}>
+                      <Text style={styles.categoryTitle}>{category.name}</Text>
+                    </View>
+                  </ImageBackground>
                 ) : (
                   <View style={styles.fallbackBox}>
                     <Text style={styles.fallbackTitle}>{category.name}</Text>
@@ -85,34 +91,54 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: HORIZONTAL_PADDING,
-    paddingTop: SPACING.sm,
-    paddingBottom: SPACING.xl,
+    paddingTop: SPACING.xs,
+    paddingBottom: SPACING.lg,
   },
   sectionHeading: {
     fontSize: 22,
     fontWeight: '700',
     color: '#446E6C',
-    marginBottom: SPACING.md,
+    marginBottom: SPACING.sm,
     letterSpacing: -0.3,
   },
   categoryGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    gap: GAP,
+    rowGap: GAP,
   },
   categoryCard: {
     width: CARD_WIDTH,
     height: CARD_HEIGHT,
     borderRadius: 16,
     overflow: 'hidden',
-    backgroundColor: '#F1F5F9',
+    backgroundColor: '#E2E8F0',
     ...SHADOWS.sm,
   },
-  tileImage: {
+  tileBackground: {
     width: '100%',
     height: '100%',
+  },
+  tileImage: {
     borderRadius: 16,
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(15, 23, 42, 0.28)',
+    paddingTop: 14,
+    paddingHorizontal: 8,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  categoryTitle: {
+    color: '#FFFFFF',
+    fontSize: 17,
+    fontWeight: '800',
+    textAlign: 'center',
+    letterSpacing: 0.2,
+    textShadowColor: 'rgba(0, 0, 0, 0.65)',
+    textShadowOffset: { width: 0, height: 1.5 },
+    textShadowRadius: 4,
   },
   fallbackBox: {
     flex: 1,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SPACING } from '../constants/theme';
 
@@ -22,13 +22,13 @@ export default function BrandHeader({
         </TouchableOpacity>
       )}
 
-      {/* Brand Logo with stylish underline and dot */}
+      {/* High-Resolution Brand Logo matching exact reference upload */}
       <View style={[styles.logoWrapper, centered && styles.logoCentered]}>
-        <Text style={styles.brandTitle}>MyShoppy</Text>
-        <View style={styles.underlineRow}>
-          <View style={styles.underlineBar} />
-          <View style={styles.underlineDot} />
-        </View>
+        <Image
+          source={require('../../assets/brand-logo.png')}
+          style={centered ? styles.brandLogoCentered : styles.brandLogoLeft}
+          resizeMode="contain"
+        />
       </View>
 
       {/* Right System & Profile Icons */}
@@ -65,9 +65,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: SPACING.md,
     paddingTop: SPACING.xs,
-    paddingBottom: SPACING.sm,
+    paddingBottom: SPACING.xs,
     backgroundColor: COLORS.surface,
-    minHeight: 52,
+    minHeight: 48,
   },
   headerCentered: {
     justifyContent: 'center',
@@ -82,35 +82,18 @@ const styles = StyleSheet.create({
     marginRight: SPACING.sm,
   },
   logoWrapper: {
-    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   logoCentered: {
     alignItems: 'center',
   },
-  brandTitle: {
-    fontSize: 26,
-    fontWeight: '800',
-    fontStyle: 'italic',
-    color: COLORS.primary,
-    letterSpacing: -0.6,
+  brandLogoLeft: {
+    width: 116,
+    height: 36,
   },
-  underlineRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 1,
-  },
-  underlineBar: {
-    width: 62,
-    height: 2.2,
-    backgroundColor: COLORS.primary,
-    borderRadius: 1,
-  },
-  underlineDot: {
-    width: 4.5,
-    height: 4.5,
-    borderRadius: 2.5,
-    backgroundColor: COLORS.primary,
-    marginLeft: 2,
+  brandLogoCentered: {
+    width: 132,
+    height: 42,
   },
   rightIconsGroup: {
     flexDirection: 'row',

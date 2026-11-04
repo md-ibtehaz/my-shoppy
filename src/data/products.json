@@ -226,86 +226,93 @@
   {
     "id": "15",
     "name": "Casual T-Shirt",
-    "category": "Travel",
+    "category": "Cloth",
     "price": 499,
     "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600",
     "subtitle": "Casual T-Shirt - premium quality crafted",
     "rating": 4.9,
     "ratingCount": 121,
     "stock": 12,
-    "color": "Standard"
+    "color": "Standard",
+    "subCategory": "Cloth"
   },
   {
     "id": "16",
     "name": "Denim Jacket",
-    "category": "Travel",
+    "category": "Cloth",
     "price": 1499,
     "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600",
     "subtitle": "Denim Jacket - premium quality crafted",
     "rating": 4.9,
     "ratingCount": 121,
     "stock": 12,
-    "color": "Standard"
+    "color": "Standard",
+    "subCategory": "Cloth"
   },
   {
     "id": "17",
     "name": "Women's Dress",
-    "category": "Travel",
+    "category": "Cloth",
     "price": 999,
     "image": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=600",
     "subtitle": "Women's Dress - premium quality crafted",
     "rating": 4.9,
     "ratingCount": 121,
     "stock": 12,
-    "color": "Standard"
+    "color": "Standard",
+    "subCategory": "Cloth"
   },
   {
     "id": "18",
     "name": "Classic Jeans",
-    "category": "Travel",
+    "category": "Cloth",
     "price": 1199,
     "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=600",
     "subtitle": "Classic Jeans - premium quality crafted",
     "rating": 4.9,
     "ratingCount": 121,
     "stock": 12,
-    "color": "Standard"
+    "color": "Standard",
+    "subCategory": "Cloth"
   },
   {
     "id": "19",
     "name": "Formal Shirt",
-    "category": "Travel",
+    "category": "Cloth",
     "price": 799,
     "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600",
     "subtitle": "Formal Shirt - premium quality crafted",
     "rating": 4.9,
     "ratingCount": 121,
     "stock": 12,
-    "color": "Standard"
+    "color": "Standard",
+    "subCategory": "Cloth"
   },
   {
     "id": "20",
     "name": "Summer Top",
-    "category": "Travel",
+    "category": "Cloth",
     "price": 599,
     "image": "https://images.unsplash.com/photo-1566206091558-7f218b696731?w=600",
     "subtitle": "Summer Top - premium quality crafted",
     "rating": 4.9,
     "ratingCount": 121,
     "stock": 12,
-    "color": "Standard"
+    "color": "Standard",
+    "subCategory": "Cloth"
   },
   {
     "id": "21",
     "name": "Winter Hoodie",
-    "category": "Travel",
+    "category": "Cloth",
     "price": 1299,
     "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600",
     "subtitle": "Winter Hoodie - premium quality crafted",
     "rating": 4.9,
     "ratingCount": 121,
     "stock": 12,
-    "color": "Standard"
+    "color": "Standard",
+    "subCategory": "Cloth"
   },
   {
     "id": "22",
