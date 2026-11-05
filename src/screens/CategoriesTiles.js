@@ -31,8 +31,8 @@ export default function CategoriesTiles({ navigation }) {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
-      {/* Brand Header with MyShoppy + Battery/Signal/Profile Icons */}
-      <BrandHeader showRightIcons={true} />
+      {/* Centered Brand Header */}
+      <BrandHeader centered={true} showRightIcons={false} />
 
       <ScrollView
         style={styles.container}

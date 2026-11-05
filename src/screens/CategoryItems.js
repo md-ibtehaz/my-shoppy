@@ -167,8 +167,8 @@ export default function CategoryItems({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      {/* Universal Brand Header (MyShoppy + Right Battery/Signal/Profile Icons) */}
-      <BrandHeader showBack onBack={() => navigation.goBack()} />
+      {/* Brand Header with centered logo & back button */}
+      <BrandHeader centered={true} showBack onBack={() => navigation.goBack()} />
 
       {/* Subcategory Breadcrumbs & Heading (Matching Image 2 Left) */}
       <View style={styles.headerBar}>

@@ -28,7 +28,7 @@ export default function ProductDetail({ route, navigation }) {
   if (!product) {
     return (
       <SafeAreaView style={styles.safeArea} edges={['top']}>
-        <BrandHeader showBack onBack={() => navigation.goBack()} />
+        <BrandHeader centered={true} showBack onBack={() => navigation.goBack()} />
         <View style={styles.notFoundContainer}>
           <Text style={styles.notFoundText}>Product not found.</Text>
           <TouchableOpacity
@@ -75,8 +75,8 @@ export default function ProductDetail({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
-      {/* Universal Brand Header with MyShoppy + Battery/Signal/Profile Icons */}
-      <BrandHeader showBack onBack={() => navigation.goBack()} />
+      {/* Brand Header with centered logo & back button */}
+      <BrandHeader centered={true} showBack onBack={() => navigation.goBack()} />
 
       <ScrollView
         style={styles.container}

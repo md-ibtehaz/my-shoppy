@@ -51,8 +51,8 @@ export default function CartItems({ navigation }) {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
-      {/* Universal Brand Header (matching Reference Images 1 & 2) */}
-      <BrandHeader showRightIcons={true} />
+      {/* Centered Brand Header */}
+      <BrandHeader centered={true} showRightIcons={false} />
 
       <ScrollView
         style={styles.container}
